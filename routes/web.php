@@ -9,6 +9,8 @@ use App\Livewire\Settings\Users\Index as UserIndex;
 use App\Livewire\Settings\CrmDepartments\Index as DepartmentsIndex;
 use App\Livewire\Settings\UserTypes\Index as UserTypesIndex;
 use App\Livewire\Settings\Extensions\Index as ExtensionsIndex;
+use App\Livewire\Settings\Branches\Index as BranchesIndex;
+use App\Livewire\Settings\Companies\Index as CompaniesIndex;
 use Illuminate\Support\Facades\Route;
 use Laravel\Fortify\Features;
 
@@ -55,6 +57,12 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/extensions', ExtensionsIndex::class)
         ->name('extensions.index');
+
+    Route::get('/companies', CompaniesIndex::class)
+        ->name('companies.index');
+
+    Route::get('/branches', BranchesIndex::class)
+        ->name('branches.index');
 });
 
 });

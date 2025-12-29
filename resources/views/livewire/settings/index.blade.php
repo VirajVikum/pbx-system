@@ -65,6 +65,32 @@
                 {{ __('Manage phone extensions, types, and assign them to users.') }}
             </p>
         </a>
+        <!-- companies -->
+        <a href="{{ route('companies.index') }}" 
+           class="group relative p-4 bg-white dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700 rounded-lg hover:bg-gray-50 dark:hover:bg-zinc-700 transition flex flex-col gap-2">
+            <div class="flex items-center gap-4">
+                <x-icon.home class="w-6 h-6 text-gray-700 dark:text-gray-300" />
+                <span class="text-gray-900 dark:text-white font-medium group-hover:text-gray-900">
+                    {{ __('companies') }}
+                </span>
+            </div>
+            <p class="text-gray-500 dark:text-gray-400 text-sm">
+                {{ __('Manage phone extensions, types, and assign them to users.') }}
+            </p>
+        </a>
+        <!-- branches -->
+        <a href="{{ route('branches.index') }}" 
+           class="group relative p-4 bg-white dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700 rounded-lg hover:bg-gray-50 dark:hover:bg-zinc-700 transition flex flex-col gap-2">
+            <div class="flex items-center gap-4">
+                <x-icon.map class="w-6 h-6 text-gray-700 dark:text-gray-300" />
+                <span class="text-gray-900 dark:text-white font-medium group-hover:text-gray-900">
+                    {{ __('branches') }}
+                </span>
+            </div>
+            <p class="text-gray-500 dark:text-gray-400 text-sm">
+                {{ __('Manage phone branches, types, and assign them to users.') }}
+            </p>
+        </a>
 
     </div>
 </div>

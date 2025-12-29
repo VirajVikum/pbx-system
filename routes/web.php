@@ -1,9 +1,14 @@
 <?php
 
 use App\Livewire\Settings\Appearance;
+use App\Livewire\Settings\Index as SettingsIndex;
 use App\Livewire\Settings\Password;
 use App\Livewire\Settings\Profile;
 use App\Livewire\Settings\TwoFactor;
+use App\Livewire\Settings\Users\Index as UserIndex;
+use App\Livewire\Settings\Departments\Index as DepartmentsIndex;
+use App\Livewire\Settings\UserTypes\Index as UserTypesIndex;
+use App\Livewire\Settings\Extensions\Index as ExtensionsIndex;
 use Illuminate\Support\Facades\Route;
 use Laravel\Fortify\Features;
 
@@ -33,5 +38,23 @@ Route::middleware(['auth'])->group(function () {
             ),
         )
         ->name('two-factor.show');
+
+    Route::middleware(['auth'])->prefix('settings')->group(function () {
+
+    Route::get('/', SettingsIndex::class)
+        ->name('settings.index');
+
+    Route::get('/users', UserIndex::class)
+        ->name('pbx-users.index');
+
+    Route::get('/departments', DepartmentsIndex::class)
+        ->name('departments.index');
+
+    Route::get('/user-types', UserTypesIndex::class)
+        ->name('user-types.index');
+
+    Route::get('/extensions', ExtensionsIndex::class)
+        ->name('extensions.index');
+});
 
 });

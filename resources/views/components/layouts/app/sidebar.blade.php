@@ -12,19 +12,21 @@
             </a>
 
             <flux:navlist variant="outline">
-                <flux:navlist.group :heading="__('Platform')" class="grid">
-                    <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>{{ __('Dashboard') }}</flux:navlist.item>
-                </flux:navlist.group>
+    <flux:navlist.group :heading="__('Platform')" class="grid">
+        <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>
+            {{ __('Dashboard') }}
+        </flux:navlist.item>
+    </flux:navlist.group>
 
-                @if(auth()->user()->isAdmin())
-                    <flux:navlist.group :heading="__('PBX Management')" class="grid">
-                        <flux:navlist.item icon="users" :href="route('pbx-users.index')" :current="request()->routeIs('pbx-users.*')" wire:navigate>{{ __('Users') }}</flux:navlist.item>
-                        <flux:navlist.item icon="building-office" :href="route('departments.index')" :current="request()->routeIs('departments.*')" wire:navigate>{{ __('Departments') }}</flux:navlist.item>
-                        <flux:navlist.item icon="user-group" :href="route('user-types.index')" :current="request()->routeIs('user-types.*')" wire:navigate>{{ __('User Types') }}</flux:navlist.item>
-                        <flux:navlist.item icon="phone" :href="route('extensions.index')" :current="request()->routeIs('extensions.*')" wire:navigate>{{ __('Extensions') }}</flux:navlist.item>
-                    </flux:navlist.group>
-                @endif
-            </flux:navlist>
+    @can('is-admin')
+        <flux:navlist.group :heading="__('PBX Management')" class="grid">
+            <flux:navlist.item icon="cog" :href="route('settings.index')" :current="request()->routeIs('settings.*')" wire:navigate>
+                {{ __('Settings') }}
+            </flux:navlist.item>
+        </flux:navlist.group>
+    @endcan
+</flux:navlist>
+
 
             <flux:spacer />
 
@@ -68,13 +70,13 @@
 
                     <flux:menu.separator />
 
-                    @if(auth()->user()->isAdmin())
+                    @can('is-admin')
                         <flux:menu.radio.group>
                             <flux:menu.item :href="route('profile.edit')" icon="cog" wire:navigate>{{ __('Settings') }}</flux:menu.item>
                         </flux:menu.radio.group>
 
                         <flux:menu.separator />
-                    @endif
+                    @endcan
 
                     <form method="POST" action="{{ route('logout') }}" class="w-full">
                         @csrf
@@ -120,13 +122,13 @@
 
                     <flux:menu.separator />
 
-                    @if(auth()->user()->isAdmin())
+                    @can('is-admin')
                         <flux:menu.radio.group>
                             <flux:menu.item :href="route('profile.edit')" icon="cog" wire:navigate>{{ __('Settings') }}</flux:menu.item>
                         </flux:menu.radio.group>
 
                         <flux:menu.separator />
-                    @endif
+                    @endcan
 
                     <form method="POST" action="{{ route('logout') }}" class="w-full">
                         @csrf

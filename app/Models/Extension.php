@@ -25,11 +25,9 @@ class Extension extends Model
         'department',
         'status',
         'updatedby',
-        'datetime',
     ];
 
     protected $casts = [
         'status' => 'boolean',
-        'datetime' => 'datetime',
     ];
 }

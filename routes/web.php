@@ -6,7 +6,7 @@ use App\Livewire\Settings\Password;
 use App\Livewire\Settings\Profile;
 use App\Livewire\Settings\TwoFactor;
 use App\Livewire\Settings\Users\Index as UserIndex;
-use App\Livewire\Settings\Departments\Index as DepartmentsIndex;
+use App\Livewire\Settings\CrmDepartments\Index as DepartmentsIndex;
 use App\Livewire\Settings\UserTypes\Index as UserTypesIndex;
 use App\Livewire\Settings\Extensions\Index as ExtensionsIndex;
 use Illuminate\Support\Facades\Route;

@@ -24,7 +24,7 @@ return new class extends Migration
 
             $table->boolean('status')->default(1);
             $table->string('updatedby')->nullable();
-            $table->timestamp('datetime')->nullable();
+            $table->timestamps();
 
             $table->softDeletes();
         });

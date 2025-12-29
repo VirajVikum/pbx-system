@@ -6,10 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
-<<<<<<< HEAD
 use Illuminate\Support\Str;
-=======
->>>>>>> 995990fb199babce302d5c03f60ca4999273175a
 
 class User extends Authenticatable
 {
@@ -91,8 +88,4 @@ class User extends Authenticatable
         'updated_at' => 'datetime',
         'deleted_at' => 'datetime',
     ];
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 995990fb199babce302d5c03f60ca4999273175a

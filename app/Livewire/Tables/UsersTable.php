@@ -5,7 +5,8 @@ namespace App\Livewire\Tables;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
 use App\Models\User;
-use Rappasoft\LaravelLivewireTables\Views\Actions\Button;
+use App\Models\Extension;
+use Illuminate\Support\Facades\DB;
 
 
 class UsersTable extends DataTableComponent
@@ -17,7 +18,25 @@ class UsersTable extends DataTableComponent
 
 public function deleteUser(int $id): void
 {
-    User::findOrFail($id)->delete();
+    $user = User::findOrFail($id);
+    
+    try {
+        DB::connection('pbx')->beginTransaction();
+        DB::connection('call_server')->beginTransaction();
+
+        if ($user->extension) {
+            Extension::where('extension', $user->extension)->update(['status' => 0]);
+        }
+
+        $user->delete();
+
+        DB::connection('pbx')->commit();
+        DB::connection('call_server')->commit();
+    } catch (\Exception $e) {
+        DB::connection('pbx')->rollBack();
+        DB::connection('call_server')->rollBack();
+        throw $e;
+    }
 }
 
 

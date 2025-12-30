@@ -91,9 +91,17 @@ class CreateModal extends Component
         }
     }
 
-    private function loadExtensions()
+    private function loadExtensions(?string $currentExtension = null)
     {
-        $this->extensions = Extension::where('status', 0)->get();
+        $query = Extension::where('status', 0);
+        
+        if ($currentExtension) {
+            $query->orWhere('extension', $currentExtension);
+            $this->extension = $currentExtension;
+        }
+        
+        $this->extensions = $query->get();
+        
     }
 
     public function createUser(): void
@@ -104,6 +112,8 @@ class CreateModal extends Component
 
     public function editUser(int $id): void
     {
+        $this->resetForm(); // Reset state before editing
+        
         $user = User::findOrFail($id);
 
         $this->userId = $user->id;
@@ -120,6 +130,9 @@ class CreateModal extends Component
         $this->extension = $user->extension;
         $this->password = ''; // Don't fill password on edit for security
 
+        // Load extensions including current one
+        $this->loadExtensions($user->extension);
+
         // Reload dependent dropdowns BEFORE setting the selected IDs
         if ($this->tenant_context) {
             $this->loadBranches($this->tenant_context);
@@ -132,14 +145,6 @@ class CreateModal extends Component
         }
         
         $this->department_id = $user->department_id;
-
-        // Include current extension if editing
-        if ($user->extension) {
-            $currentExt = Extension::where('extension', $user->extension)->first();
-            if ($currentExt && !$this->extensions->contains('extension', $user->extension)) {
-                $this->extensions->push($currentExt);
-            }
-        }
 
         $this->open = true;
     }
@@ -218,6 +223,35 @@ class CreateModal extends Component
             DB::connection('pbx')->rollBack();
             DB::connection('call_server')->rollBack();
             throw $e;
+        }
+    }
+
+    public function unassignExtension(): void
+    {
+        if ($this->userId && $this->extension) {
+            try {
+                DB::connection('pbx')->beginTransaction();
+                DB::connection('call_server')->beginTransaction();
+
+                // Free up the extension
+                Extension::where('extension', $this->extension)->update(['status' => 0]);
+                
+                // Clear extension from user
+                User::where('id', $this->userId)->update(['extension' => null]);
+
+                DB::connection('pbx')->commit();
+                DB::connection('call_server')->commit();
+
+                $this->extension = null;
+                $this->loadExtensions(); // Refresh available extensions list
+                $this->dispatch('refreshDatatable');
+            } catch (\Exception $e) {
+                DB::connection('pbx')->rollBack();
+                DB::connection('call_server')->rollBack();
+                throw $e;
+            }
+        } else {
+            $this->extension = null;
         }
     }
 

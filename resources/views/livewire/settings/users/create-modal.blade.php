@@ -33,10 +33,12 @@
                         @error('nic') <p class="mt-1 text-sm text-red-600">{{ $message }}</p> @enderror
                     </div>
 
-                     <div>
+                     @if(!$userId)
+                    <div>
                         <flux:input wire:model="password" type="password" :label="__('Password')" :required="!$userId" viewable />
                         @error('password') <p class="mt-1 text-sm text-red-600">{{ $message }}</p> @enderror
                     </div>
+                    @endif
 
                     <div>
                         <flux:select wire:model="gender" :label="__('Gender')">
@@ -89,6 +91,7 @@
                         @error('department_id') <p class="mt-1 text-sm text-red-600">{{ $message }}</p> @enderror
                     </div>
 
+                    @if(!$userId)
                     <div>
                         <flux:select wire:model="extension" :label="__('Extension')">
                             <flux:select.option value="">{{ __('Select Extension') }}</flux:select.option>
@@ -98,6 +101,25 @@
                         </flux:select>
                         @error('extension') <p class="mt-1 text-sm text-red-600">{{ $message }}</p> @enderror
                     </div>
+                    @else
+                        @if($extension)
+                        <div>
+                            <flux:label>{{ __('Extension') }}</flux:label>
+                            <div class="flex items-center justify-between p-2 mt-1 border border-gray-200 rounded-md dark:border-white/10 bg-gray-50 dark:bg-white/5">
+                                <span class="text-sm">{{ $extension }}</span>
+                                <button type="button" 
+                                    wire:click="unassignExtension" 
+                                    wire:confirm="{{ __('Are you sure you want to unassign this extension?') }}"
+                                    class="p-1 transition-colors rounded-md hover:bg-red-50 dark:hover:bg-red-900/20 text-red-500" 
+                                    title="{{ __('Unassign Extension') }}">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        @endif
+                    @endif
 
                     <div>
                         <flux:input wire:model="address" :label="__('Address')" required />

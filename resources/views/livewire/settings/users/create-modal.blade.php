@@ -1,55 +1,26 @@
 <div>
-    @if($open)
-        <div class="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-            <div class="w-full max-w-lg p-6 bg-white rounded-lg">
+    <flux:modal name="create-user" wire:model="open" class="max-w-lg">
+        <div class="space-y-6">
+            <div>
+                <flux:heading size="lg">{{ $userId ? __('Edit User') : __('Create User') }}</flux:heading>
+            </div>
 
-                <h2 class="mb-4 text-lg font-semibold">
-                    {{ $userId ? 'Edit User' : 'Create User' }}
-                </h2>
+            <div class="space-y-4">
+                <flux:input wire:model="name" :label="__('Name')" />
+                <flux:input wire:model="email" type="email" :label="__('Email')" />
+                <flux:input wire:model="phone" :label="__('Phone')" />
+                <flux:input wire:model="extension" :label="__('Extension')" />
+                <flux:input wire:model="password" type="password" :label="__('Password')" />
+            </div>
 
-                <div class="space-y-3">
-                    <input
-                        wire:model.defer="name"
-                        class="w-full border rounded p-2"
-                        placeholder="Name"
-                    >
+            <div class="flex justify-end space-x-2">
+                <flux:modal.close>
+                    <flux:button variant="ghost">{{ __('Cancel') }}</flux:button>
+                </flux:modal.close>
 
-                    <input
-                        wire:model.defer="email"
-                        class="w-full border rounded p-2"
-                        placeholder="Email"
-                    >
-
-                    <input
-                        wire:model.defer="phone"
-                        class="w-full border rounded p-2"
-                        placeholder="Phone"
-                    >
-
-                    <input
-                        wire:model.defer="extension"
-                        class="w-full border rounded p-2"
-                        placeholder="Extension"
-                    >
-                </div>
-
-                <div class="flex justify-end gap-2 mt-6">
-                    <button
-                        wire:click="$set('open', false)"
-                        class="px-4 py-2 border rounded"
-                    >
-                        Cancel
-                    </button>
-
-                    <button
-                        wire:click="save"
-                        class="px-4 py-2 text-white bg-green-600 rounded"
-                    >
-                        Save
-                    </button>
-                </div>
-
+                <flux:button wire:click="save" variant="primary">{{ __('Save') }}</flux:button>
             </div>
         </div>
-    @endif
+    </flux:modal>
 </div>
+

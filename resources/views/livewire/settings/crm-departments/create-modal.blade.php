@@ -1,27 +1,23 @@
 <div>
-    @if($open)
-        <div class="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-            <div class="w-full max-w-md p-6 bg-white rounded-lg shadow-lg">
+    <flux:modal name="create-department" wire:model="open" class="max-w-md">
+        <div class="space-y-6">
+            <div>
+                <flux:heading size="lg">{{ $departmentId ? __('Edit Department') : __('Create Department') }}</flux:heading>
+            </div>
 
-                <h2 class="mb-4 text-lg font-semibold">
-                    {{ $departmentId ? 'Edit Department' : 'Create Department' }}
-                </h2>
+            <div class="space-y-4">
+                <flux:input wire:model="name" :label="__('Name')" />
+                <flux:input wire:model="branch_id" type="number" :label="__('Branch ID')" />
+            </div>
 
-                <div class="space-y-3">
-                    <input wire:model.defer="name" class="w-full border rounded p-2" placeholder="Department Name">
-                    <input wire:model.defer="branch_id" type="number" class="w-full border rounded p-2" placeholder="Branch ID">
-                </div>
+            <div class="flex justify-end space-x-2">
+                <flux:modal.close>
+                    <flux:button variant="ghost">{{ __('Cancel') }}</flux:button>
+                </flux:modal.close>
 
-                <div class="flex justify-end gap-2 mt-6">
-                    <button wire:click="$set('open', false)" class="px-4 py-2 border rounded">
-                        Cancel
-                    </button>
-                    <button wire:click="save" class="px-4 py-2 text-white bg-green-600 rounded">
-                        Save
-                    </button>
-                </div>
-
+                <flux:button wire:click="save" variant="primary">{{ __('Save') }}</flux:button>
             </div>
         </div>
-    @endif
+    </flux:modal>
 </div>
+

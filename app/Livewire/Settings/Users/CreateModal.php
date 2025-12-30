@@ -13,6 +13,7 @@ class CreateModal extends Component
 
     public string $name = '';
     public string $email = '';
+    public string $password = '';
     public ?string $phone = null;
     public ?string $extension = null;
 
@@ -41,6 +42,7 @@ class CreateModal extends Component
         $this->name = $user->name;
         $this->email = $user->email;
         $this->phone = $user->phone;
+        $this->password = $user->password;
         $this->extension = $user->extension;
 
         $this->open = true;
@@ -60,6 +62,7 @@ class CreateModal extends Component
             ],
             'phone' => ['nullable'],
             'extension' => ['nullable'],
+            'password' => ['required', 'string', 'min:8', 'max:255'],
         ]);
 
         User::updateOrCreate(
@@ -69,6 +72,7 @@ class CreateModal extends Component
                 'email' => $this->email,
                 'phone' => $this->phone,
                 'extension' => $this->extension,
+                'password' => $this->password,
             ]
         );
 
@@ -78,7 +82,7 @@ class CreateModal extends Component
 
     private function resetForm(): void
     {
-        $this->reset(['userId', 'name', 'email', 'phone', 'extension']);
+        $this->reset(['userId', 'name', 'email', 'phone', 'extension', 'password']);
     }
 
     public function render()

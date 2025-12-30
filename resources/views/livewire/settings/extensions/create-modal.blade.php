@@ -1,38 +1,27 @@
 <div>
-    @if($open)
-        <div class="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-            <div class="w-full max-w-lg p-6 bg-white rounded-lg">
+    <flux:modal name="create-extension" wire:model="open" class="max-w-lg">
+        <div class="space-y-6">
+            <div>
+                <flux:heading size="lg">{{ $extensionId ? __('Edit Extension') : __('Create Extension') }}</flux:heading>
+            </div>
 
-                <h2 class="mb-4 text-lg font-semibold">
-                    {{ $extensionId ? 'Edit Extension' : 'Create Extension' }}
-                </h2>
+            <div class="space-y-4">
+                <flux:input wire:model="extension" :label="__('Extension')" />
+                <flux:input wire:model="password" type="password" :label="__('Password')" />
+                <flux:input wire:model="context" :label="__('Context')" />
+                <flux:input wire:model="phone_type" :label="__('Phone Type')" />
+                <flux:input wire:model="department" :label="__('Department')" />
+                <flux:input wire:model="status" :label="__('Status')" />
+            </div>
 
-                <div class="space-y-3">
-                    <input wire:model.defer="extension" class="w-full border rounded p-2" placeholder="Extension">
-                    <input wire:model.defer="password" class="w-full border rounded p-2" placeholder="Password">
-                    <input wire:model.defer="context" class="w-full border rounded p-2" placeholder="Context">
-                    <input wire:model.defer="phone_type" class="w-full border rounded p-2" placeholder="Phone Type">
-                    <input wire:model.defer="department" class="w-full border rounded p-2" placeholder="Department">
-                    <input wire:model.defer="status" class="w-full border rounded p-2" placeholder="Status">
-                </div>
+            <div class="flex justify-end space-x-2">
+                <flux:modal.close>
+                    <flux:button variant="ghost">{{ __('Cancel') }}</flux:button>
+                </flux:modal.close>
 
-                <div class="flex justify-end gap-2 mt-6">
-                    <button
-                        wire:click="$set('open', false)"
-                        class="px-4 py-2 border rounded"
-                    >
-                        Cancel
-                    </button>
-
-                    <button
-                        wire:click="save"
-                        class="px-4 py-2 text-white bg-green-600 rounded"
-                    >
-                        Save
-                    </button>
-                </div>
-
+                <flux:button wire:click="save" variant="primary">{{ __('Save') }}</flux:button>
             </div>
         </div>
-    @endif
+    </flux:modal>
 </div>
+

@@ -1,7 +1,7 @@
 <div class="space-y-4">
-    <button wire:click="$dispatch('createBranch')" class="px-4 py-2 text-white bg-green-600 rounded">
-        + Create Branch
-    </button>
+    <flux:button wire:click="$dispatch('createBranch')" icon="plus" variant="primary">
+        {{ __('Create Branch') }}
+    </flux:button>
 
     <livewire:tables.branch-table />
     <livewire:settings.branches.create-modal />

@@ -4,6 +4,7 @@ namespace App\Livewire\Tables;
 
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
+use Rappasoft\LaravelLivewireTables\Views\Filters\SelectFilter;
 use App\Models\User;
 use App\Models\Extension;
 use Illuminate\Support\Facades\DB;
@@ -45,6 +46,40 @@ public function deleteUser(int $id): void
         $this->setPrimaryKey('id');
     }
 
+    public function filters(): array
+    {
+        return [
+            SelectFilter::make('Company', 'tenant_context')
+                ->options(
+                    ['' => 'All Companies'] + \App\Models\Company::pluck('name', 'name')->toArray()
+                )
+                ->filter(function($builder, string $value) {
+                    $builder->where('users.tenant_context', $value);
+                }),
+            SelectFilter::make('Branch', 'branch_id')
+                ->options(
+                    ['' => 'All Branches'] + \App\Models\Branch::pluck('name', 'id')->toArray()
+                )
+                ->filter(function($builder, string $value) {
+                    $builder->where('users.branch_id', $value);
+                }),
+            SelectFilter::make('Department', 'department_id')
+                ->options(
+                    ['' => 'All Departments'] + \App\Models\CrmDepartment::pluck('name', 'id')->toArray()
+                )
+                ->filter(function($builder, string $value) {
+                    $builder->where('users.department_id', $value);
+                }),
+            SelectFilter::make('User Type', 'user_type_id')
+                ->options(
+                    ['' => 'All User Types'] + \App\Models\UserType::pluck('title', 'id')->toArray()
+                )
+                ->filter(function($builder, string $value) {
+                    $builder->where('users.user_type_id', $value);
+                }),
+        ];
+    }
+
     public function columns(): array
     {
         return [
@@ -62,7 +97,8 @@ public function deleteUser(int $id): void
             Column::make("Phone", "phone")
                 ->sortable(),
             Column::make("Extension", "extension")
-                ->sortable(),
+                ->sortable()
+                ->searchable(),
             Column::make("User Type", "userType.title")
                 ->sortable(),
             Column::make("Company", "tenant_context")

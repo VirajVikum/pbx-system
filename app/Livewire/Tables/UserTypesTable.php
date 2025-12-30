@@ -33,7 +33,8 @@ public function deleteUserType(int $id): void
             Column::make("Id", "id")
                 ->sortable(),
             Column::make("Title", "title")
-                ->sortable(),
+                ->sortable()
+                ->searchable(),
             Column::make("Created at", "created_at")
                 ->sortable(),
             Column::make("Updated at", "updated_at")

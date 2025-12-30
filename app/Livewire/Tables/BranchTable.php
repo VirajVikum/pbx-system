@@ -4,6 +4,7 @@ namespace App\Livewire\Tables;
 
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
+use Rappasoft\LaravelLivewireTables\Views\Filters\SelectFilter;
 use App\Models\Branch;
 
 class BranchTable extends DataTableComponent
@@ -25,18 +26,31 @@ public function deleteBranch(int $id): void
         $this->setPrimaryKey('id');
     }
 
+    public function filters(): array
+    {
+        return [
+            SelectFilter::make('Company', 'company_id')
+                ->options(
+                    ['' => 'All Companies'] + \App\Models\Company::pluck('name', 'id')->toArray()
+                )
+                ->filter(function($builder, string $value) {
+                    $builder->where('company_id', $value);
+                }),
+        ];
+    }
+
     public function columns(): array
     {
         return [
             Column::make("Id", "id")
                 ->sortable(),
             Column::make("Name", "name")
-                ->sortable(),
+                ->sortable()
+                ->searchable(),
             Column::make("Code", "code")
-                ->sortable(),
+                ->sortable()
+                ->searchable(),
             Column::make("Company", "company.name")
-                ->sortable(),
-            Column::make("Status", "status")
                 ->sortable(),
             Column::make("Created at", "created_at")
                 ->sortable(),

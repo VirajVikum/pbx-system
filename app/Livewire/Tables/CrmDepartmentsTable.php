@@ -4,6 +4,7 @@ namespace App\Livewire\Tables;
 
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
+use Rappasoft\LaravelLivewireTables\Views\Filters\SelectFilter;
 use App\Models\CrmDepartment;
 
 class CrmDepartmentsTable extends DataTableComponent
@@ -24,13 +25,27 @@ class CrmDepartmentsTable extends DataTableComponent
         $this->setPrimaryKey('id');
     }
 
+    public function filters(): array
+    {
+        return [
+            SelectFilter::make('Branch', 'branch_id')
+                ->options(
+                    ['' => 'All Branches'] + \App\Models\Branch::pluck('name', 'id')->toArray()
+                )
+                ->filter(function($builder, string $value) {
+                    $builder->where('branch_id', $value);
+                }),
+        ];
+    }
+
     public function columns(): array
     {
         return [
             Column::make("Id", "id")
                 ->sortable(),
             Column::make("Name", "name")
-                ->sortable(),
+                ->sortable()
+                ->searchable(),
             Column::make("Branch", "branch.name")
                 ->sortable(),
             Column::make("Created at", "created_at")

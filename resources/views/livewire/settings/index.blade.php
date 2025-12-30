@@ -1,11 +1,9 @@
 <div class="p-6 space-y-6">
     <!-- Page Title -->
-    <h1 class="text-2xl font-semibold text-gray-900 dark:text-white">
-        {{ __('Settings') }}
-    </h1>
-    <p class="text-gray-500 dark:text-gray-400">
-        {{ __('Manage Users, Departments, User Types, and Extensions.') }}
-    </p>
+    <div>
+        <flux:heading size="xl" level="1">{{ __('Settings') }}</flux:heading>
+        <flux:subheading>{{ __('Manage your application settings, users, and organizational structure.') }}</flux:subheading>
+    </div>
 
     <!-- Settings Grid -->
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">

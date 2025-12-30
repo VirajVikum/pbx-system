@@ -10,83 +10,97 @@
         
         <!-- Users -->
         <a href="{{ route('pbx-users.index') }}" 
-           class="group relative p-4 bg-white dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700 rounded-lg hover:bg-gray-50 dark:hover:bg-zinc-700 transition flex flex-col gap-2">
+           class="group relative flex flex-col gap-4 rounded-xl border border-zinc-200 bg-white p-6 shadow-sm transition-all hover:shadow-md dark:border-zinc-700 dark:bg-zinc-900 dark:shadow-zinc-900/50">
             <div class="flex items-center gap-4">
-                <x-icon.users class="w-6 h-6 text-gray-700 dark:text-gray-300" />
-                <span class="text-gray-900 dark:text-white font-medium group-hover:text-gray-900">
+                <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-zinc-100 group-hover:bg-zinc-200 dark:bg-zinc-800 dark:group-hover:bg-zinc-700">
+                    <x-icon.users class="h-5 w-5 text-zinc-900 dark:text-zinc-100" />
+                </div>
+                <h3 class="text-base font-semibold text-zinc-900 dark:text-white">
                     {{ __('Users') }}
-                </span>
+                </h3>
             </div>
-            <p class="text-gray-500 dark:text-gray-400 text-sm">
+            <p class="text-sm text-zinc-500 dark:text-zinc-400">
                 {{ __('Manage all PBX users, assign roles, and configure access.') }}
             </p>
         </a>
 
         <!-- Departments -->
         <a href="{{ route('departments.index') }}" 
-           class="group relative p-4 bg-white dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700 rounded-lg hover:bg-gray-50 dark:hover:bg-zinc-700 transition flex flex-col gap-2">
+           class="group relative flex flex-col gap-4 rounded-xl border border-zinc-200 bg-white p-6 shadow-sm transition-all hover:shadow-md dark:border-zinc-700 dark:bg-zinc-900 dark:shadow-zinc-900/50">
             <div class="flex items-center gap-4">
-                <x-icon.building-office class="w-6 h-6 text-gray-700 dark:text-gray-300" />
-                <span class="text-gray-900 dark:text-white font-medium group-hover:text-gray-900">
+                <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-zinc-100 group-hover:bg-zinc-200 dark:bg-zinc-800 dark:group-hover:bg-zinc-700">
+                    <x-icon.building-office class="h-5 w-5 text-zinc-900 dark:text-zinc-100" />
+                </div>
+                <h3 class="text-base font-semibold text-zinc-900 dark:text-white">
                     {{ __('Departments') }}
-                </span>
+                </h3>
             </div>
-            <p class="text-gray-500 dark:text-gray-400 text-sm">
+            <p class="text-sm text-zinc-500 dark:text-zinc-400">
                 {{ __('Create and manage company departments and assign users.') }}
             </p>
         </a>
 
         <!-- User Types -->
         <a href="{{ route('user-types.index') }}" 
-           class="group relative p-4 bg-white dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700 rounded-lg hover:bg-gray-50 dark:hover:bg-zinc-700 transition flex flex-col gap-2">
+           class="group relative flex flex-col gap-4 rounded-xl border border-zinc-200 bg-white p-6 shadow-sm transition-all hover:shadow-md dark:border-zinc-700 dark:bg-zinc-900 dark:shadow-zinc-900/50">
             <div class="flex items-center gap-4">
-                <x-icon.user-group class="w-6 h-6 text-gray-700 dark:text-gray-300" />
-                <span class="text-gray-900 dark:text-white font-medium group-hover:text-gray-900">
+                <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-zinc-100 group-hover:bg-zinc-200 dark:bg-zinc-800 dark:group-hover:bg-zinc-700">
+                    <x-icon.user-group class="h-5 w-5 text-zinc-900 dark:text-zinc-100" />
+                </div>
+                <h3 class="text-base font-semibold text-zinc-900 dark:text-white">
                     {{ __('User Types') }}
-                </span>
+                </h3>
             </div>
-            <p class="text-gray-500 dark:text-gray-400 text-sm">
+            <p class="text-sm text-zinc-500 dark:text-zinc-400">
                 {{ __('Define roles and access levels for PBX users.') }}
             </p>
         </a>
 
         <!-- Extensions -->
         <a href="{{ route('extensions.index') }}" 
-           class="group relative p-4 bg-white dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700 rounded-lg hover:bg-gray-50 dark:hover:bg-zinc-700 transition flex flex-col gap-2">
+           class="group relative flex flex-col gap-4 rounded-xl border border-zinc-200 bg-white p-6 shadow-sm transition-all hover:shadow-md dark:border-zinc-700 dark:bg-zinc-900 dark:shadow-zinc-900/50">
             <div class="flex items-center gap-4">
-                <x-icon.phone class="w-6 h-6 text-gray-700 dark:text-gray-300" />
-                <span class="text-gray-900 dark:text-white font-medium group-hover:text-gray-900">
+                <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-zinc-100 group-hover:bg-zinc-200 dark:bg-zinc-800 dark:group-hover:bg-zinc-700">
+                    <x-icon.phone class="h-5 w-5 text-zinc-900 dark:text-zinc-100" />
+                </div>
+                <h3 class="text-base font-semibold text-zinc-900 dark:text-white">
                     {{ __('Extensions') }}
-                </span>
+                </h3>
             </div>
-            <p class="text-gray-500 dark:text-gray-400 text-sm">
+            <p class="text-sm text-zinc-500 dark:text-zinc-400">
                 {{ __('Manage phone extensions, types, and assign them to users.') }}
             </p>
         </a>
-        <!-- companies -->
+
+        <!-- Companies -->
         <a href="{{ route('companies.index') }}" 
-           class="group relative p-4 bg-white dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700 rounded-lg hover:bg-gray-50 dark:hover:bg-zinc-700 transition flex flex-col gap-2">
+           class="group relative flex flex-col gap-4 rounded-xl border border-zinc-200 bg-white p-6 shadow-sm transition-all hover:shadow-md dark:border-zinc-700 dark:bg-zinc-900 dark:shadow-zinc-900/50">
             <div class="flex items-center gap-4">
-                <x-icon.home class="w-6 h-6 text-gray-700 dark:text-gray-300" />
-                <span class="text-gray-900 dark:text-white font-medium group-hover:text-gray-900">
-                    {{ __('companies') }}
-                </span>
+                <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-zinc-100 group-hover:bg-zinc-200 dark:bg-zinc-800 dark:group-hover:bg-zinc-700">
+                    <x-icon.home class="h-5 w-5 text-zinc-900 dark:text-zinc-100" />
+                </div>
+                <h3 class="text-base font-semibold text-zinc-900 dark:text-white">
+                    {{ __('Companies') }}
+                </h3>
             </div>
-            <p class="text-gray-500 dark:text-gray-400 text-sm">
-                {{ __('Manage phone extensions, types, and assign them to users.') }}
+            <p class="text-sm text-zinc-500 dark:text-zinc-400">
+                {{ __('Manage company profiles and settings.') }}
             </p>
         </a>
-        <!-- branches -->
+
+        <!-- Branches -->
         <a href="{{ route('branches.index') }}" 
-           class="group relative p-4 bg-white dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700 rounded-lg hover:bg-gray-50 dark:hover:bg-zinc-700 transition flex flex-col gap-2">
+           class="group relative flex flex-col gap-4 rounded-xl border border-zinc-200 bg-white p-6 shadow-sm transition-all hover:shadow-md dark:border-zinc-700 dark:bg-zinc-900 dark:shadow-zinc-900/50">
             <div class="flex items-center gap-4">
-                <x-icon.map class="w-6 h-6 text-gray-700 dark:text-gray-300" />
-                <span class="text-gray-900 dark:text-white font-medium group-hover:text-gray-900">
-                    {{ __('branches') }}
-                </span>
+                <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-zinc-100 group-hover:bg-zinc-200 dark:bg-zinc-800 dark:group-hover:bg-zinc-700">
+                    <x-icon.map class="h-5 w-5 text-zinc-900 dark:text-zinc-100" />
+                </div>
+                <h3 class="text-base font-semibold text-zinc-900 dark:text-white">
+                    {{ __('Branches') }}
+                </h3>
             </div>
-            <p class="text-gray-500 dark:text-gray-400 text-sm">
-                {{ __('Manage phone branches, types, and assign them to users.') }}
+            <p class="text-sm text-zinc-500 dark:text-zinc-400">
+                {{ __('Manage branch locations and assignments.') }}
             </p>
         </a>
 

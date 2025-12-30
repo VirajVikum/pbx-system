@@ -21,6 +21,7 @@ class Extension extends Model
         'exten_type',
         'password',
         'context',
+        'branch',
         'phone_type',
         'department',
         'status',
@@ -30,4 +31,9 @@ class Extension extends Model
     protected $casts = [
         'status' => 'boolean',
     ];
+
+    public function updater()
+    {
+        return $this->belongsTo(Agent::class, 'updatedby');
+    }
 }

@@ -34,7 +34,7 @@ public function deleteBranch(int $id): void
                 ->sortable(),
             Column::make("Code", "code")
                 ->sortable(),
-            Column::make("Company id", "company_id")
+            Column::make("Company", "company.name")
                 ->sortable(),
             Column::make("Status", "status")
                 ->sortable(),

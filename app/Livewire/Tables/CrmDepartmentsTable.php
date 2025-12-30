@@ -31,7 +31,7 @@ class CrmDepartmentsTable extends DataTableComponent
                 ->sortable(),
             Column::make("Name", "name")
                 ->sortable(),
-            Column::make("Branch id", "branch_id")
+            Column::make("Branch", "branch.name")
                 ->sortable(),
             Column::make("Created at", "created_at")
                 ->sortable(),

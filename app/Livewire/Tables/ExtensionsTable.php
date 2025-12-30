@@ -36,15 +36,17 @@ public function deleteExtension(int $id): void
                 ->sortable(),
             Column::make("Password", "password")
                 ->sortable(),
-            Column::make("Context", "context")
+            Column::make("Company", "context")
                 ->sortable(),
-            Column::make("Phone type", "phone_type")
+            Column::make("Branch", "branch")
                 ->sortable(),
             Column::make("Department", "department")
                 ->sortable(),
+            Column::make("Phone type", "phone_type")
+                ->sortable(),
             Column::make("Status", "status")
                 ->sortable(),
-            Column::make("Updatedby", "updatedby")
+            Column::make("Updated by", "updater.username")
                 ->sortable(),
             Column::make("Created at", "created_at")
                 ->sortable(),

@@ -12,7 +12,6 @@ class CreateModal extends Component
     public ?int $companyId = null;
 
     public string $name = '';
-    public ?string $status = null;
 
     protected $listeners = [
         'createCompany',
@@ -38,7 +37,6 @@ class CreateModal extends Component
 
         $this->companyId = $company->id;
         $this->name = $company->name;
-        $this->status = $company->status;
 
         $this->open = true;
     }
@@ -50,14 +48,13 @@ class CreateModal extends Component
     {
         $this->validate([
             'name' => ['required', 'string'],
-            'status' => ['nullable', 'string'],
         ]);
 
         Company::updateOrCreate(
             ['id' => $this->companyId],
             [
                 'name' => $this->name,
-                'status' => $this->status,
+                'status' => $this->companyId ? Company::find($this->companyId)->status : 1,
             ]
         );
 
@@ -79,7 +76,7 @@ class CreateModal extends Component
     ==========================*/
     private function resetForm(): void
     {
-        $this->reset(['companyId', 'name', 'status']);
+        $this->reset(['companyId', 'name']);
     }
 
     public function render()

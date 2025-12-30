@@ -5,9 +5,8 @@
                 <flux:heading size="lg">{{ $companyId ? __('Edit Company') : __('Create Company') }}</flux:heading>
             </div>
 
-            <div class="space-y-4">
-                <flux:input wire:model="name" :label="__('Name')" />
-                <flux:input wire:model="status" :label="__('Status')" />
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <flux:input wire:model="name" :label="__('Name')" required />
             </div>
 
             <div class="flex justify-end space-x-2">

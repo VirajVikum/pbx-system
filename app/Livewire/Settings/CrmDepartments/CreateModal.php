@@ -4,6 +4,7 @@ namespace App\Livewire\Settings\CrmDepartments;
 
 use Livewire\Component;
 use App\Models\CrmDepartment;
+use App\Models\Branch;
 
 class CreateModal extends Component
 {
@@ -13,6 +14,7 @@ class CreateModal extends Component
 
     public string $name = '';
     public ?int $branch_id = null;
+    public $branches = [];
 
     protected $listeners = [
         'createDepartment',
@@ -74,6 +76,7 @@ class CreateModal extends Component
 
     public function render()
     {
+        $this->branches = Branch::all();
         return view('livewire.settings.crm-departments.create-modal');
     }
 }

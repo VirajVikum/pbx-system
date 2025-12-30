@@ -4,6 +4,9 @@ namespace App\Livewire\Settings\Extensions;
 
 use Livewire\Component;
 use App\Models\Extension;
+use App\Models\Company;
+use App\Models\Branch;
+use App\Models\CrmDepartment;
 use Illuminate\Validation\Rule;
 
 class CreateModal extends Component
@@ -13,11 +16,17 @@ class CreateModal extends Component
     public ?int $extensionId = null;
 
     public string $extension = '';
+    public ?string $exten_type = null;
     public string $password = '';
-    public string $context = '';
-    public ?string $phone_type = null;
+    public string $context = ''; // Company Name
+    public ?string $branch = null;
     public ?string $department = null;
-    public ?string $status = null;
+    public ?string $phone_type = null;
+
+    // Selection data
+    public $companies = [];
+    public $branchesList = [];
+    public $departmentsList = [];
 
     protected $listeners = [
         'createExtension',
@@ -42,13 +51,59 @@ class CreateModal extends Component
 
         $this->extensionId = $ext->id;
         $this->extension = $ext->extension;
+        $this->exten_type = $ext->exten_type;
         $this->password = $ext->password;
         $this->context = $ext->context;
-        $this->phone_type = $ext->phone_type;
+        $this->branch = $ext->branch;
         $this->department = $ext->department;
-        $this->status = $ext->status;
+        $this->phone_type = $ext->phone_type;
+
+        if ($this->context) {
+            $this->loadBranches($this->context);
+        }
+        if ($this->branch) {
+            $this->loadDepartments($this->branch);
+        }
 
         $this->open = true;
+    }
+
+    public function updatedContext($value)
+    {
+        $this->branch = null;
+        $this->department = null;
+        $this->loadBranches($value);
+    }
+
+    private function loadBranches($companyName)
+    {
+        $this->branchesList = [];
+        $this->departmentsList = [];
+
+        if ($companyName) {
+            $company = Company::where('name', $companyName)->first();
+            if ($company) {
+                $this->branchesList = Branch::where('company_id', $company->id)->get();
+            }
+        }
+    }
+
+    public function updatedBranch($value)
+    {
+        $this->department = null;
+        $this->loadDepartments($value);
+    }
+
+    private function loadDepartments($branchName)
+    {
+        $this->departmentsList = [];
+
+        if ($branchName) {
+            $branch = Branch::where('name', $branchName)->first();
+            if ($branch) {
+                $this->departmentsList = CrmDepartment::where('branch_id', $branch->id)->get();
+            }
+        }
     }
 
     /* =========================
@@ -66,11 +121,14 @@ class CreateModal extends Component
             ['id' => $this->extensionId],
             [
                 'extension' => $this->extension,
+                'exten_type' => $this->exten_type,
                 'password' => $this->password,
                 'context' => $this->context,
-                'phone_type' => $this->phone_type,
+                'branch' => $this->branch,
                 'department' => $this->department,
-                'status' => $this->status,
+                'phone_type' => $this->phone_type,
+                'status' => $this->extensionId ? Extension::find($this->extensionId)->status : 0,
+                'updatedby' => auth()->id(),
             ]
         );
 
@@ -83,17 +141,21 @@ class CreateModal extends Component
         $this->reset([
             'extensionId',
             'extension',
+            'exten_type',
             'password',
             'context',
-            'phone_type',
+            'branch',
             'department',
-            'status',
+            'phone_type',
         ]);
+        $this->branchesList = [];
+        $this->departmentsList = [];
     }
 
 
     public function render()
     {
+        $this->companies = Company::all();
         return view('livewire.settings.extensions.create-modal');
     }
 }

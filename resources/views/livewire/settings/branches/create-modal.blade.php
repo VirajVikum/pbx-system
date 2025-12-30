@@ -5,11 +5,15 @@
                 <flux:heading size="lg">{{ $branchId ? __('Edit Branch') : __('Create Branch') }}</flux:heading>
             </div>
 
-            <div class="space-y-4">
-                <flux:input wire:model="name" :label="__('Name')" />
-                <flux:input wire:model="code" :label="__('Code')" />
-                <flux:input wire:model="company_id" type="number" :label="__('Company ID')" />
-                <flux:input wire:model="status" :label="__('Status')" />
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <flux:input wire:model="name" :label="__('Name')" required />
+                <flux:input wire:model="code" :label="__('Code')" required />
+                <flux:select wire:model="company_id" :label="__('Company')" required>
+                    <flux:select.option value="">{{ __('Select Company') }}</flux:select.option>
+                    @foreach($companies as $company)
+                        <flux:select.option value="{{ $company->id }}">{{ $company->name }}</flux:select.option>
+                    @endforeach
+                </flux:select>
             </div>
 
             <div class="flex justify-end space-x-2">

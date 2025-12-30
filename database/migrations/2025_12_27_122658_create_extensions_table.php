@@ -21,6 +21,7 @@ return new class extends Migration
             // ✅ New fields
             $table->string('phone_type')->nullable();
             $table->string('department')->nullable();
+            $table->string('branch')->nullable();
 
             $table->boolean('status')->default(1);
             $table->string('updatedby')->nullable();

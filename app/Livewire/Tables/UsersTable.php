@@ -32,46 +32,27 @@ public function deleteUser(int $id): void
             Column::make("Id", "id")
                 ->sortable(),
             Column::make("Name", "name")
-                ->sortable(),
+                ->sortable()
+                ->searchable(),
+            Column::make("User name", "user_name")
+                ->sortable()
+                ->searchable(),
             Column::make("Email", "email")
-                ->sortable(),
-            Column::make("Tenant context", "tenant_context")
-                ->sortable(),
-            Column::make("Two factor confirmed at", "two_factor_confirmed_at")
-                ->sortable(),
-            Column::make("Current team id", "current_team_id")
-                ->sortable(),
-            Column::make("Profile photo path", "profile_photo_path")
-                ->sortable(),
-            Column::make("Agent id", "agent_id")
+                ->sortable()
+                ->searchable(),
+            Column::make("Phone", "phone")
                 ->sortable(),
             Column::make("Extension", "extension")
                 ->sortable(),
-            Column::make("User name", "user_name")
+            Column::make("User Type", "userType.title")
                 ->sortable(),
-            Column::make("Phone", "phone")
+            Column::make("Company", "tenant_context")
                 ->sortable(),
-            Column::make("Nic", "nic")
+            Column::make("Branch", "branch.name")
                 ->sortable(),
-            Column::make("Gender", "gender")
-                ->sortable(),
-            Column::make("Address", "address")
-                ->sortable(),
-            Column::make("Break started at", "break_started_at")
-                ->sortable(),
-            Column::make("Agent break id", "agent_break_id")
-                ->sortable(),
-            Column::make("User type id", "user_type_id")
-                ->sortable(),
-            Column::make("Outlet id", "outlet_id")
-                ->sortable(),
-            Column::make("Department id", "department_id")
-                ->sortable(),
-            Column::make("Agent break type", "agent_break_type")
+            Column::make("Department", "department.name")
                 ->sortable(),
             Column::make("Created at", "created_at")
-                ->sortable(),
-            Column::make("Updated at", "updated_at")
                 ->sortable(),
 
             Column::make('Actions')

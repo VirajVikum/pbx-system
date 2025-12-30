@@ -58,9 +58,33 @@ class User extends Authenticatable
         'agent_break_id',
         'user_type_id',
         'outlet_id',
+        'branch_id',
         'department_id',
         'agent_break_type',
     ];
+
+    public function userType()
+    {
+        return $this->belongsTo(UserType::class, 'user_type_id');
+    }
+
+    public function branch()
+    {
+        return $this->belongsTo(Branch::class, 'branch_id');
+    }
+
+    public function department()
+    {
+        return $this->belongsTo(CrmDepartment::class, 'department_id');
+    }
+
+    // Since tenant_context is the company name, we might not have a direct company() relationship by ID
+    // but the user said "tenant_context is company name".
+    // If we want to link it via name:
+    public function company()
+    {
+        return $this->belongsTo(Company::class, 'tenant_context', 'name');
+    }
 
     /**
      * The attributes that should be hidden for serialization.

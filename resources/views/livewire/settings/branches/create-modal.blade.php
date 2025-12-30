@@ -6,14 +6,15 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <flux:input wire:model="name" :label="__('Name')" required />
-                <flux:input wire:model="code" :label="__('Code')" required />
                 <flux:select wire:model="company_id" :label="__('Company')" required>
                     <flux:select.option value="">{{ __('Select Company') }}</flux:select.option>
                     @foreach($companies as $company)
                         <flux:select.option value="{{ $company->id }}">{{ $company->name }}</flux:select.option>
                     @endforeach
                 </flux:select>
+                <flux:input wire:model="name" :label="__('Name')" required />
+                <flux:input wire:model="code" :label="__('Code')" required />
+                
             </div>
 
             <div class="flex justify-end space-x-2">

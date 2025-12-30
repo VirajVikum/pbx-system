@@ -1,12 +1,12 @@
 <div>
-    <flux:modal name="create-user" wire:model="open" class="max-w-4xl">
+    <flux:modal name="create-user" wire:model="open" class="max-w-6xl">
         <div class="space-y-6">
             <div>
                 <flux:heading size="lg">{{ $userId ? __('Edit User') : __('Create User') }}</flux:heading>
             </div>
 
             <form wire:submit="save" class="space-y-6">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <!-- Basic Information -->
                     <div>
                         <flux:input wire:model="name" :label="__('Name')" required />
@@ -31,6 +31,11 @@
                     <div>
                         <flux:input wire:model="nic" :label="__('NIC')" />
                         @error('nic') <p class="mt-1 text-sm text-red-600">{{ $message }}</p> @enderror
+                    </div>
+
+                    <div>
+                        <flux:input wire:model="address" :label="__('Address')" required />
+                        @error('address') <p class="mt-1 text-sm text-red-600">{{ $message }}</p> @enderror
                     </div>
 
                      @if(!$userId)
@@ -121,10 +126,7 @@
                         @endif
                     @endif
 
-                    <div>
-                        <flux:input wire:model="address" :label="__('Address')" required />
-                        @error('address') <p class="mt-1 text-sm text-red-600">{{ $message }}</p> @enderror
-                    </div>
+                    
 
                     @if($user_type_id == 5)
                         <div>
